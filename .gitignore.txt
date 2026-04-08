@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.hfss.lock
+*.aedtresults/
+.DS_Store
