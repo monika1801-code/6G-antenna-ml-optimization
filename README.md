@@ -1,5 +1,11 @@
 # Design and Optimization of a Terahertz Antenna for 6G Applications using CSRR and Machine Learning
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-0A66C2?style=for-the-badge)
+![HFSS](https://img.shields.io/badge/Ansys%20HFSS-FFB71B?style=for-the-badge)
+![6G Research](https://img.shields.io/badge/6G-Research-purple?style=for-the-badge)
+
 > **Published Research Project**  
 > This repository contains the implementation, simulation outputs, datasets, and machine learning workflow behind our research work:  
 > **"Design and Optimization of a Terahertz Antenna for 6G Applications using CSRR and Machine Learning"**  
@@ -58,6 +64,14 @@ Instead of relying only on repeated electromagnetic simulations, the project int
 | Return loss (S11) | −39.6 dB @ 3.6–3.8 THz | −32.7 dB @ 1.6–1.7 THz |
 | Antenna Gain | 3.52 dB | **6.42 dB** |
 | Bandwidth | 3.6–3.8 THz | 1.6–1.7 THz |
+
+## Resume Highlights
+
+- Designed and simulated a **Terahertz antenna for 6G applications** using **Ansys HFSS**
+- Applied **Machine Learning regression models** to optimize antenna design parameters
+- Built a simulation-driven dataset and evaluated **13 ML models** for antenna parameter prediction
+- Identified an optimized antenna configuration that improved **gain from 3.52 dB to 6.42 dB**
+- Combined **electromagnetic simulation + data-driven optimization** into a research workflow
 
 ### Key Insight
 The **machine learning model identified an optimized patch width** that improved antenna gain significantly and shifted the operating response to a different resonant region.
@@ -186,19 +200,20 @@ param_grid = {
     'gamma': ['scale', 'auto', 0.01, 0.1, 1],
     'epsilon': [0.01, 0.1, 0.5, 1]
 }
+```
 
 
 ## Best Tuned SVR
 
-kernel='rbf'
-C=10
-epsilon=1
-gamma=1
+- kernel='rbf'
+- C=10
+- epsilon=1
+- gamma=1
 
 ### Performance:
 
-MSE: 323.84
-R²: 0.072
+- MSE: 323.84
+- R²: 0.072
 
 Although tuning improved SVR performance, CatBoost still outperformed all other models.
 
@@ -206,16 +221,17 @@ Although tuning improved SVR performance, CatBoost still outperformed all other 
 
 This project shows how machine learning can support antenna design by:
 
-reducing repeated HFSS simulation cycles
-accelerating design-space exploration
-identifying better-performing parameter combinations
-supporting data-driven engineering decisions
+- reducing repeated HFSS simulation cycles
+- accelerating design-space exploration
+- identifying better-performing parameter combinations
+- supporting data-driven engineering decisions
 
 This is especially useful in THz antenna research, where small dimensional changes can significantly affect resonant behavior.
 
 
 ##  Repository Structure
 
+``` bash
 6G-antenna-ml-optimization/
 │
 ├── Data/                  # CSV datasets from HFSS simulations
@@ -224,47 +240,61 @@ This is especially useful in THz antenna research, where small dimensional chang
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+```
 
 ## How to Run
 
-1) Clone the Repository
-git clone https://github.com/your-username/6G-antenna-ml-optimization.git
-cd 6G-antenna-ml-optimization
-2) Install Dependencies
-pip install -r requirements.txt
-3) Launch Jupyter Notebook
-jupyter notebook
+### 1. Clone the Repository
 
-Then open the notebooks inside the Notebooks/ folder and run them in sequence.
+```bash
+git clone https://github.com/monika1801-code/6G-antenna-ml-optimization.git
+cd 6G-antenna-ml-optimization
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Launch Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+Then open the notebooks inside the `Notebooks/` folder and run them in sequence.
 
 ## Requirements
 
-pandas
-numpy
-matplotlib
-scikit-learn
-xgboost
-lightgbm
-catboost
-tensorflow
-jupyter
-notebook
+- pandas
+- numpy
+- matplotlib
+- scikit-learn
+- xgboost
+- lightgbm
+- catboost
+- tensorflow
+- jupyter
+- notebook
 
 ### Install them using:
 
-pip install -r requirements.txt
-Applications
+- pip install -r requirements.txt
 
-## This project is relevant to:
+## Applications
 
-6G antenna research
-Terahertz communication systems
-ML-assisted electromagnetic design
-Simulation-driven optimization
-Intelligent wireless system development
-Future Scope
+This project is relevant to:
 
-## Possible extensions of this work include:
+- 6G antenna research
+- Terahertz communication systems
+- ML-assisted electromagnetic design
+- Simulation-driven optimization
+- Intelligent wireless system development
+
+## Future Scope
+
+ Possible extensions of this work include:
 
  - deep learning models for multi-parameter prediction
  - multi-objective optimization of gain, bandwidth, and return loss
@@ -277,7 +307,6 @@ Future Scope
 
 If you use this work in research or reference this repository, please cite:
 
-K. Rojamani, R.S. Monika, T.A.K. Chaitanya, K. Prashanth Kumar,
 "Design and Optimization of a Terahertz Antenna for 6G Applications
 using CSRR and Machine Learning,"
 Krishna University College of Engineering & Technology, 2024.
