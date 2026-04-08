@@ -1,46 +1,89 @@
-# ML-Optimized Terahertz Antenna for 6G Applications
+# Design and Optimization of a Terahertz Antenna for 6G Applications using CSRR and Machine Learning
 
-> **Published Research** — This repository contains the complete code, dataset, and implementation details behind our paper:  
-> *"Design and Optimization of a Terahertz Antenna for 6G Applications using CSRR and Machine Learning"*  
-> K. Rojamani, R.S. Monika, T.A.K. Chaitanya, K. Prashanth Kumar  
-> Krishna University College of Engineering & Technology, Machilipatnam, AP, India
+> **Published Research Project**  
+> This repository contains the implementation, simulation outputs, datasets, and machine learning workflow behind our research work:  
+> **"Design and Optimization of a Terahertz Antenna for 6G Applications using CSRR and Machine Learning"**  
+> **Authors:** K. Rojamani, R.S. Monika, T.A.K. Chaitanya, K. Prashanth Kumar  
+> **Institution:** Krishna University College of Engineering & Technology, Machilipatnam, Andhra Pradesh, India
 
 ---
 
-## The Problem
+## Project Overview
 
-Designing a THz antenna for 6G applications requires tuning multiple physical parameters — one of the most sensitive being the **patch width (W1)**. The traditional approach means:
+This project presents a **Terahertz (THz) antenna design for 6G applications** integrated with a **Machine Learning-based optimization workflow** to improve antenna performance and reduce simulation effort.
 
-1. Adjust W1 manually
-2. Re-simulate the full structure in HFSS
-3. Check return loss (S11) and VSWR
-4. Repeat dozens of times
+The antenna was designed and analyzed using **Ansys HFSS**, while simulation outputs were converted into structured datasets for machine learning-based parameter prediction. The work combines:
 
-This is slow, expensive in compute time, and prone to human bias. **We used machine learning to break this loop** — train once on simulation data, then predict the optimal W1 directly.
+- **Electromagnetic antenna design**
+- **CSRR-based performance enhancement**
+- **HFSS simulation analysis**
+- **Regression-based machine learning optimization**
+
+The main goal was to optimize critical antenna design parameters more efficiently than traditional trial-and-error simulation.
+
+---
+
+## Problem Statement
+
+Designing a THz antenna for 6G communication requires careful tuning of physical parameters. One of the most sensitive design parameters in this work was the **patch width (W1)**.
+
+### Traditional optimization process:
+1. Manually change W1
+2. Re-simulate the antenna in HFSS
+3. Evaluate **S11 (Return Loss)** and **VSWR**
+4. Repeat until acceptable performance is obtained
+
+This process is:
+- time-consuming
+- computationally expensive
+- dependent on manual trial-and-error
+
+To address this, this project uses **Machine Learning to predict the optimal antenna parameter directly from simulation data**, reducing repeated HFSS iterations.
+
+---
+
+## Research Contribution
+
+This work demonstrates how **Machine Learning can assist antenna optimization** by learning from simulation data and identifying better-performing design parameters.
+
+Instead of relying only on repeated electromagnetic simulations, the project introduces a **data-driven optimization pipeline** for THz antenna design.
 
 ---
 
 ## Key Results
 
-| Metric | Before ML | After ML Optimization |
-|---|---|---|
+| Metric | Initial Design | After ML Optimization |
+|---|---:|---:|
 | Patch width (W1) | 4 µm | **36 µm** |
 | Return loss (S11) | −39.6 dB @ 3.6–3.8 THz | −32.7 dB @ 1.6–1.7 THz |
-| Antenna gain | 3.52 dB | **6.42 dB** |
+| Antenna Gain | 3.52 dB | **6.42 dB** |
 | Bandwidth | 3.6–3.8 THz | 1.6–1.7 THz |
 
-> The gain nearly doubled. The ML model identified a patch width that conventional iterative tuning had not reached.
+### Key Insight
+The **machine learning model identified an optimized patch width** that improved antenna gain significantly and shifted the operating response to a different resonant region.
+
+This shows that ML can serve as an effective **design-assistance tool** for antenna engineers and researchers.
 
 ---
 
 ## Antenna Design
 
-The antenna is a **concentric circular patch** on a 100×100×10 µm substrate, operating in the terahertz band. A **Complementary Split Ring Resonator (CSRR)** is etched on the ground plane to improve impedance matching and introduce additional resonance modes.
+The antenna is a **concentric circular patch antenna** designed for **terahertz-band operation**, intended for next-generation **6G wireless communication systems**.
 
-### Antenna Parameters
+A **Complementary Split Ring Resonator (CSRR)** was introduced in the ground plane to improve:
+- impedance matching
+- resonance behavior
+- electromagnetic response characteristics
+
+### Simulation Tool
+- **Ansys HFSS (High Frequency Structure Simulator)**
+
+---
+
+## Antenna Parameters
 
 | Parameter | Dimension |
-|---|---|
+|---|---:|
 | Substrate length/width (Ls = Ws) | 100 µm |
 | Substrate height (Hs) | 10 µm |
 | Ground plane length (Lg) | 100 µm |
@@ -52,38 +95,67 @@ The antenna is a **concentric circular patch** on a 100×100×10 µm substrate, 
 | Feed line (Lf = Wf) | 5 µm |
 | Parasitic element (L3 × W3) | 30 × 4 µm |
 
-Simulated using **Ansys HFSS** (High-Frequency Structure Simulator).
+---
+
+## HFSS Simulation Outputs
+
+The antenna was simulated in HFSS and evaluated using key performance metrics such as:
+
+- **S-Parameters (S11 / Return Loss)**
+- **VSWR**
+- **Radiation Pattern**
+- **3D Polar Plot**
+- **Comparative response before and after optimization**
+
+The simulation outputs were then exported and used as the basis for the machine learning workflow.
 
 ---
 
 ## Machine Learning Approach
 
-### Dataset
+The machine learning component of this project was used to predict the antenna parameter **W1 (patch width)** based on simulation characteristics.
 
-The dataset (`data/s11_vswr.csv`) was generated by simulating the antenna with the circular patch width (W1) varied from **4 µm to 60 µm** in increments, recording the corresponding S11 and VSWR values across the frequency sweep.
+### Objective
+Use antenna response data to learn the relationship between:
+- frequency response
+- return loss
+- impedance behavior
+
+and then predict the **best-performing antenna configuration**.
+
+---
+
+## Dataset
+
+The dataset was generated by varying the antenna design parameter **W1 from 4 µm to 60 µm** and recording simulation outputs.
+
+### Dataset Features
 
 | Column | Description |
 |---|---|
 | `Freq_Thz` | Simulation frequency in terahertz |
-| `S11-db` | Return loss in dB (target signal quality metric) |
+| `S11-db` | Return loss in dB |
 | `VSWR` | Voltage Standing Wave Ratio |
-| `W1` | Patch width in µm (the parameter being predicted) |
+| `W1` | Patch width in µm (target parameter) |
 
-- Total rows: ~1,806
-- Train/test split: 80% / 20%
-- Features used: `Freq_Thz`, `S11-db`
-- Target: `W1`
+### Dataset Summary
+- Total rows: **~1,806**
+- Train/Test Split: **80% / 20%**
+- Input Features: `Freq_Thz`, `S11-db`
+- Target Variable: `W1`
 
-### Models Evaluated
+---
 
-13 regression models were trained and compared:
+## Models Evaluated
+
+A total of **13 regression models** were trained and compared.
 
 | Model | MSE | R² |
-|---|---|---|
-| SVR (linear kernel) | 361.54 | −0.062 |
-| SVR (poly kernel) | 359.65 | −0.056 |
-| SVR (RBF kernel) | 352.58 | −0.036 |
-| SVR (tuned via GridSearchCV) | 323.84 | 0.072 |
+|---|---:|---:|
+| SVR (Linear Kernel) | 361.54 | −0.062 |
+| SVR (Polynomial Kernel) | 359.65 | −0.056 |
+| SVR (RBF Kernel) | 352.58 | −0.036 |
+| SVR (Tuned via GridSearchCV) | 323.84 | 0.072 |
 | Linear Regression | 348.07 | 0.003 |
 | ElasticNet | 349.27 | −0.001 |
 | Polynomial Regression (degree=1) | 348.07 | 0.003 |
@@ -94,11 +166,18 @@ The dataset (`data/s11_vswr.csv`) was generated by simulating the antenna with t
 | **CatBoost Regressor** | **248.82** | **0.287** |
 | KNN Regressor (k=5) | 338.93 | 0.029 |
 
-**CatBoost was selected as the best model** based on lowest MSE and highest R².
+### Best Model
+✅ **CatBoost Regressor** performed best based on:
+- **lowest Mean Squared Error (MSE)**
+- **highest R² score**
 
-### Hyperparameter Tuning
+---
 
-SVR was additionally tuned using `GridSearchCV` with 2-fold cross-validation across 240 hyperparameter combinations (480 total fits):
+## Hyperparameter Tuning
+
+Support Vector Regression (SVR) was additionally tuned using **GridSearchCV**.
+
+### Parameter Grid
 
 ```python
 param_grid = {
@@ -107,134 +186,108 @@ param_grid = {
     'gamma': ['scale', 'auto', 0.01, 0.1, 1],
     'epsilon': [0.01, 0.1, 0.5, 1]
 }
-```
 
-Best SVR config: `kernel='rbf', C=10, epsilon=1, gamma=1` → MSE: 323.84, R²: 0.072  
-Still outperformed by CatBoost without any tuning.
 
----
+## Best Tuned SVR
 
-## Repository Structure
+kernel='rbf'
+C=10
+epsilon=1
+gamma=1
 
-```
+### Performance:
+
+MSE: 323.84
+R²: 0.072
+
+Although tuning improved SVR performance, CatBoost still outperformed all other models.
+
+##  Why Machine Learning Helped
+
+This project shows how machine learning can support antenna design by:
+
+reducing repeated HFSS simulation cycles
+accelerating design-space exploration
+identifying better-performing parameter combinations
+supporting data-driven engineering decisions
+
+This is especially useful in THz antenna research, where small dimensional changes can significantly affect resonant behavior.
+
+
+##  Repository Structure
+
 6G-antenna-ml-optimization/
 │
+├── Data/                  # CSV datasets from HFSS simulations
+├── HFSS_design/           # HFSS output plots and antenna simulation visuals
+├── Notebooks/             # Jupyter notebooks for ML model training and analysis
 ├── README.md
 ├── requirements.txt
-├── .gitignore
-│
-├── data/
-│   ├── s11_vswr.csv                  # Full simulation dataset
-│   └── data_description.md           # Column definitions and context
-│
-├── notebooks/
-│   ├── 01_model_comparison.ipynb     # All 13 models trained and evaluated
-│   └── 02_best_model_analysis.ipynb  # CatBoost deep-dive + W1 prediction
-│
-└── hfss_design/
-    ├── results/
-    │   ├── s_parameter_initial.png   # S11 before ML (W1=4µm)
-    │   ├── vswr_initial.png
-    │   ├── s_parameter_optimized.png # S11 after ML (W1=36µm)
-    │   ├── vswr_optimized.png
-    │   ├── radiation_pattern.png
-    │   └── 3d_polar_plot.png
-    └── README_hfss.md                # Notes on HFSS setup and simulation
-```
-
----
+└── .gitignore
 
 ## How to Run
 
-### 1. Clone the repository
-
-```bash
+1) Clone the Repository
 git clone https://github.com/your-username/6G-antenna-ml-optimization.git
 cd 6G-antenna-ml-optimization
-```
-
-### 2. Install dependencies
-
-```bash
+2) Install Dependencies
 pip install -r requirements.txt
-```
+3) Launch Jupyter Notebook
+jupyter notebook
 
-### 3. Run the notebooks
-
-Open Jupyter and run in order:
-
-```bash
-jupyter notebook notebooks/01_model_comparison.ipynb
-jupyter notebook notebooks/02_best_model_analysis.ipynb
-```
-
-All outputs (MSE, R², prediction tables) are pre-saved — you can read through without re-running.
-
----
+Then open the notebooks inside the Notebooks/ folder and run them in sequence.
 
 ## Requirements
 
-```
 pandas
+numpy
+matplotlib
 scikit-learn
 xgboost
 lightgbm
 catboost
 tensorflow
-matplotlib
-seaborn
 jupyter
-```
+notebook
 
-Install all at once:
+### Install them using:
 
-```bash
 pip install -r requirements.txt
-```
+Applications
 
----
+## This project is relevant to:
 
-## Why This Matters
+6G antenna research
+Terahertz communication systems
+ML-assisted electromagnetic design
+Simulation-driven optimization
+Intelligent wireless system development
+Future Scope
 
-THz band (0.1–10 THz) is the foundation of 6G communication — it enables ultra-high data rates (>1 Tbps) and low latency. But antenna design at this scale is extremely sensitive; a change of even a few micrometers in patch width significantly shifts the resonant frequency and return loss.
+## Possible extensions of this work include:
 
-ML-assisted design means:
-- Fewer HFSS simulation iterations (saves hours per design cycle)
-- Data-driven parameter selection vs. experience-based guessing
-- A reusable model that can be retrained for different antenna geometries
+ - deep learning models for multi-parameter prediction
+ - multi-objective optimization of gain, bandwidth, and return loss
+ - optimization of additional antenna geometry parameters
+ - fabrication and hardware validation
+ - integration with beamforming / massive MIMO-based 6G systems
 
----
-
-## Future Work
-
-- Experimental fabrication and over-the-air validation
-- Deep learning models (LSTM, MLP) for multi-parameter prediction
-- Multi-objective optimization (gain + bandwidth + return loss simultaneously)
-- Extension to other CSRR geometries and substrate materials
-- Integration with beamforming/massive MIMO for 6G testbeds
-
----
 
 ## Citation
 
-If you use this dataset or code in your work, please cite:
+If you use this work in research or reference this repository, please cite:
 
-```
 K. Rojamani, R.S. Monika, T.A.K. Chaitanya, K. Prashanth Kumar,
 "Design and Optimization of a Terahertz Antenna for 6G Applications
 using CSRR and Machine Learning,"
 Krishna University College of Engineering & Technology, 2024.
-```
+Authors
+K. Rojamani — Assistant Professor, Department of ECE
+R.S. Monika — UG Student
+T.A.K. Chaitanya — UG Student
+K. Prashanth Kumar — UG Student
 
----
 
-## Authors
+## Keywords
 
-- **K. Rojamani** — Assistant Professor, Dept. of ECE, Krishna University College of Eng. & Tech
-- **R.S. Monika** — UG Student
-- **T.A.K. Chaitanya** — UG Student
-- **K. Prashanth Kumar** — UG Student
-
----
-
-*Keywords: 6G, terahertz antenna, CSRR, machine learning, return loss optimization, CatBoost, HFSS, antenna design*
+6G Terahertz Antenna CSRR Machine Learning HFSS CatBoost Antenna Optimization Wireless Communication Regression Modeling
